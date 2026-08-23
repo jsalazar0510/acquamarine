@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>acquamarina · catálogo</title>
+<meta property="og:title" content="acquamarina · catálogo">
+<meta property="og:description" content="hair clips y tank tops con detalles lindos 🐚">
+<style>
+  :root{
+    --crema:#F6F0E4; --arena:#EDE2CF; --tierra:#7A6A55;
+    --camel:#B08968; --blanco:#FFFDF8; --suave:#9C8B74;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  body{margin:0; background:var(--crema); color:var(--tierra); font-family:'Avenir Next','Segoe UI',system-ui,sans-serif;}
+  .app{max-width:480px; margin:0 auto; min-height:100vh; padding-bottom:60px; position:relative;}
+  .serif{font-family:Georgia,'Times New Roman',serif; font-weight:400;}
+  header{padding:26px 20px 14px; text-align:center;}
+  h1{font-family:Georgia,serif; font-weight:400; font-size:30px; letter-spacing:4px; margin:0; text-transform:lowercase;}
+  .sub{font-size:11px; letter-spacing:3px; color:var(--suave); margin-top:4px; text-transform:uppercase;}
+  .row{display:flex; gap:8px; padding:0 16px 10px;}
+  .chips{display:flex; gap:6px; overflow-x:auto; padding:0 16px 12px; scrollbar-width:none;}
+  .chips::-webkit-scrollbar{display:none;}
+  .chip{padding:6px 14px; border-radius:999px; font-size:13px; cursor:pointer; border:1px solid var(--arena); background:var(--blanco); color:var(--tierra); white-space:nowrap; transition:all .15s; font-family:inherit;}
+  .chip.on{background:var(--camel); border-color:var(--camel); color:var(--blanco);}
+  .chip.big{flex:1; padding:9px 0; font-size:14px; font-family:Georgia,serif; letter-spacing:1px; text-align:center;}
+  .chip.act{flex:1; padding:8px 0; text-align:center;}
+  .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; padding:0 16px;}
+  .card{background:var(--blanco); border:1px solid var(--arena); border-radius:14px; overflow:hidden; cursor:pointer;}
+  .card.sold{opacity:.55;}
+  .ph{aspect-ratio:1; background:var(--arena); position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden;}
+  .ph img{width:100%; height:100%; object-fit:cover; display:block;}
+  .ref{position:absolute; top:8px; left:8px; font-size:10px; letter-spacing:1px; background:rgba(255,253,248,.92); border-radius:6px; padding:3px 7px;}
+  .soldtag{position:absolute; top:8px; right:8px; font-size:10px; background:var(--tierra); color:var(--blanco); border-radius:6px; padding:3px 7px;}
+  .multitag{position:absolute; bottom:8px; right:8px; font-size:10px; background:rgba(255,253,248,.92); color:var(--tierra); border-radius:6px; padding:3px 7px;}
+  .card .info{padding:9px 10px 11px;}
+  .card .name{font-family:Georgia,serif; font-size:14px; line-height:1.25;}
+  .card .foot{display:flex; justify-content:space-between; align-items:center; margin-top:5px;}
+  .card .price{font-size:13px; font-weight:600; color:var(--camel);}
+  .empty{text-align:center; padding:50px 30px; color:var(--suave);}
+  .empty p.t{font-family:Georgia,serif; font-size:16px; margin:12px 0 4px;}
+  .overlay{position:fixed; inset:0; background:rgba(60,50,38,.45); display:flex; align-items:flex-end; justify-content:center; z-index:40;}
+  .sheet{background:var(--crema); border-radius:20px 20px 0 0; width:100%; max-width:480px; max-height:92vh; overflow-y:auto; padding:18px 18px 30px;}
+  .handle{width:40px; height:4px; background:var(--arena); border-radius:2px; margin:0 auto 14px;}
+  .gal{display:flex; overflow-x:auto; scroll-snap-type:x mandatory; border-radius:14px; margin-bottom:8px; scrollbar-width:none;}
+  .gal::-webkit-scrollbar{display:none;}
+  .gal .gph{flex:0 0 100%; aspect-ratio:1; scroll-snap-align:center; background:var(--arena); display:flex; align-items:center; justify-content:center; overflow:hidden;}
+  .gal img{width:100%; height:100%; object-fit:contain;}
+  .dots{display:flex; justify-content:center; gap:6px; margin-bottom:10px; min-height:6px;}
+  .dot{width:6px; height:6px; border-radius:50%; background:var(--arena);}
+  .dot.on{background:var(--camel);}
+  .btn{display:block; border:1px solid var(--arena); background:var(--blanco); color:var(--tierra); border-radius:999px; padding:13px 0; font-size:15px; cursor:pointer; text-align:center; font-family:inherit; text-decoration:none; margin-top:14px;}
+  .btn.wa{background:#5FA97B; border-color:#5FA97B; color:#fff;}
+  .btn.camel{background:var(--camel); border-color:var(--camel); color:var(--blanco);}
+  .caption{background:var(--blanco); border:1px solid var(--arena); border-radius:12px; padding:12px; margin-top:14px; font-size:13px; white-space:pre-wrap; line-height:1.5;}
+  .toast{position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:var(--tierra); color:var(--blanco); padding:10px 18px; border-radius:999px; font-size:13px; z-index:60; white-space:nowrap; box-shadow:0 4px 14px rgba(0,0,0,.2); max-width:90vw; text-align:center;}
+  .notice{margin:0 16px 12px; background:var(--arena); border-radius:10px; padding:10px 14px; font-size:13px; line-height:1.5;}
+  footer{text-align:center; padding:26px 16px 10px; font-size:11px; color:var(--suave); letter-spacing:1px;}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   CONFIGURACIÓN — igual que el dashboard de Warren:
+   se pega el link /exec del Apps Script publicado.
+   ═══════════════════════════════════════════════════════════════ */
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxQmQPRoVsnJ_iYu4U8Yq5sMaNMsMBZTRGuvGCUOBpielDlYRr6sq74bU62-r_GZz6MbQ/exec";
+const WHATSAPP   = "573001234567"; // ⚠️ falta el WhatsApp real de Antonia — cámbielo aquí
+/* ═══════════════════════════════════════════════════════════════ */
+
+const EMOJI = { peces:"🐠", tortugas:"🐢", "pájaros":"🕊️", pajaros:"🕊️", cangrejos:"🦀", frutas:"🍓", flores:"🌸", "vida marina":"🌊", otros:"🐚" };
+const GROUP_LABEL = { clips:"hair clips", tanks:"tank tops" };
+const isAdmin = new URLSearchParams(location.search).has("equipo");
+
+// Catálogo base: nunca vacío, aunque el script tarde en responder o falle
+const SEED = [
+  [1001,"clips","frutas","Pinza fruta · limón",16000],
+  [1002,"clips","frutas","Pinza fruta · pitaya",16000],
+  [1003,"clips","frutas","Pinza fruta · kiwi",16000],
+  [1004,"clips","frutas","Pinza fruta · sandía",16000],
+  [1005,"clips","otros","Pinza Expresso martini",18000],
+  [1006,"clips","peces","Pinza salmón oceánico",18000],
+  [1007,"clips","vida marina","Pinza Estrella Rosada Mini",8000],
+  [1008,"clips","tortugas","Pinza tortuga marina mini",6000],
+  [1009,"clips","vida marina","Pinza Caracola Mini",8000],
+  [1010,"clips","cangrejos","Pinza Cangrejo Mini rojo",8000],
+  [1011,"clips","vida marina","Pinza caballo de mar naranja mini",8000],
+  [1012,"clips","vida marina","Pinza Caracol con perla mini",8000],
+  [1013,"clips","cangrejos","Pinza Cangrejo Naranja Mini",8000],
+  [1014,"clips","frutas","Pinza chile rojo",16000],
+  [1015,"clips","otros","Pinza erizo",18000],
+  [1016,"clips","vida marina","Pinza sirena strass",18000],
+  [1017,"clips","peces","Pinza Mini tiburón",8000],
+  [1018,"clips","vida marina","Pinza Mini estrella de mar rosada",8000],
+  [2001,"tanks","vida marina","Top estrella de mar y concha · Blanco S",65000],
+  [2002,"tanks","otros","Top Aperol naranja",65000],
+  [2003,"tanks","cangrejos","Top cangrejo colgando",65000],
+  [2004,"tanks","otros","Top Margarita",65000],
+  [2005,"tanks","otros","Camiseta Overside vestido de baño · Blanco S",70000],
+  [2006,"tanks","flores","Camiseta tirantes flores y corona · Blanco S",65000],
+  [2007,"tanks","flores","Top Orquídea rosada",65000],
+  [2008,"tanks","otros","Top Beige con taches",65000],
+  [2009,"tanks","vida marina","Top ballena",65000],
+  [2010,"tanks","cangrejos","Top cangrejo",65000],
+  [2011,"tanks","frutas","Top Aceitunas Blanco",65000],
+  [2012,"tanks","frutas","Top Aceitunas Amarillo",65000],
+  [2013,"tanks","frutas","Top corto oliva strass · Negro XS",65000],
+  [2014,"tanks","otros","Top café con taches",65000],
+  [2015,"tanks","otros","Top Aperol Rosado",65000],
+  [2016,"tanks","otros","Top negro con taches (rhinestones)",65000],
+  [2017,"tanks","otros","Top sin hombros bloques de color · Blanco XS",65000],
+  [2019,"tanks","otros","Top beige con rayas café",65000],
+  [2020,"tanks","cangrejos","Top Langosta rojo",65000],
+];
+const seedProducts = () => SEED.map(([code,group,subcat,name,price]) => ({code, group, subcat, name, price, sold:false, photos:[]}));
+
+const state = { products: seedProducts(), tab:"clips", subFilter:"todas", feedMode:false, status:"base" };
+
+const fmtCOP = n => new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0}).format(n||0);
+const esc = s => String(s??"").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const shellSVG = (size,color) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none"><path d="M12 21C7 21 3.5 17 3.5 12.5C3.5 8.5 7 4 12 3C17 4 20.5 8.5 20.5 12.5C20.5 17 17 21 12 21Z" stroke="${color}" stroke-width="1.4"/><path d="M12 3V21M7.2 5.2L9.5 20.4M16.8 5.2L14.5 20.4M4.6 9L6.5 19M19.4 9L17.5 19" stroke="${color}" stroke-width="1" opacity="0.7"/></svg>`;
+
+let toastTimer;
+function toast(msg){
+  document.querySelectorAll(".toast").forEach(e=>e.remove());
+  const t = document.createElement("div"); t.className = "toast"; t.textContent = msg;
+  document.body.appendChild(t);
+  clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.remove(), 2400);
+}
+
+function normGroup(g, ref){
+  const s = String(g||"").toLowerCase();
+  if(s.includes("clip") || s.includes("pinza")) return "clips";
+  if(s.includes("tank") || s.includes("camis")) return "tanks";
+  return Number(ref) >= 2000 ? "tanks" : "clips";
+}
+
+// ── Igual que Warren: fetch directo al link /exec del Apps Script, sin login ──
+async function loadCatalog(forzar){
+  if(!SCRIPT_URL || SCRIPT_URL.startsWith("PEGAR_AQUI")){
+    if(isAdmin) state.status = "sin-config";
+    render(); return;
+  }
+  try{
+    let url = SCRIPT_URL + (SCRIPT_URL.includes("?")?"&":"?") + "t=" + Date.now();
+    if(forzar) url += "&refresh=1";
+    const res = await fetch(url);
+    if(!res.ok) throw new Error();
+    const data = await res.json();
+    if(!data.ok || !Array.isArray(data.productos) || !data.productos.length) throw new Error();
+    state.products = data.productos.map(p => ({
+      code: Number(p.code), group: normGroup(p.group, p.code),
+      subcat: String(p.subcat||"otros").trim().toLowerCase() || "otros",
+      name: String(p.name||"").trim(), price: Number(p.price)||0,
+      sold: !!p.sold, photos: Array.isArray(p.photos) ? p.photos : [],
+    }));
+    state.status = "ok";
+  }catch{ if(isAdmin) state.status = "error"; }
+  render();
+}
+
+function subcatsOf(group){
+  const set = [];
+  state.products.filter(p=>p.group===group).forEach(p=>{ if(!set.includes(p.subcat)) set.push(p.subcat); });
+  return set;
+}
+function captionFor(p){
+  const e = EMOJI[p.subcat] || "🐚", tag = p.group==="clips" ? "hairclips" : "tanktops", sub = String(p.subcat||"").replace(/[^a-záéíóúñ]/g,"");
+  return `${e} ${p.name}\n\nref. ${p.code} · ${fmtCOP(p.price)}\n\nescríbenos por DM o WhatsApp para pedir el tuyo 🤍\n\n#acquamarina #detallesparaamigas #${tag} #${sub}`;
+}
+function waLink(p){
+  const num = WHATSAPP.replace(/[^\d]/g,"");
+  if(!num) return null;
+  const msg = `¡Hola! 🐚 Me encantó la ref. ${p.code} · ${p.name} (${fmtCOP(p.price)}). ¿Está disponible?`;
+  return `https://wa.me/${num}?text=${encodeURIComponent(msg)}`;
+}
+async function copyText(text){
+  try{ await navigator.clipboard.writeText(text); return true; }
+  catch{ try{ const ta=document.createElement("textarea"); ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); return true; }catch{ return false; } }
+}
+
+// ── Subir foto: se comprime en el celular y se envía al script, que la
+//    guarda en Drive. Sin login, sin Cloud Console — el script ya
+//    tiene permiso porque quedó publicado como "Ejecutar como: Yo".
+function resizeImage(file, maxSide=1080, quality=0.85){
+  return new Promise((resolve,reject)=>{
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        const scale = Math.min(1, maxSide/Math.max(img.width,img.height));
+        const c = document.createElement("canvas");
+        c.width = Math.round(img.width*scale); c.height = Math.round(img.height*scale);
+        c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+        resolve(c.toDataURL("image/jpeg", quality).split(",")[1]); // solo el base64, sin encabezado
+      };
+      img.onerror = reject; img.src = e.target.result;
+    };
+    reader.onerror = reject; reader.readAsDataURL(file);
+  });
+}
+
+async function subirFoto(code, file){
+  const base64 = await resizeImage(file);
+  const res = await fetch(SCRIPT_URL, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" }, // evita el preflight CORS con Apps Script
+    body: JSON.stringify({ code, filename: code+"-"+Date.now()+".jpg", mimeType:"image/jpeg", data: base64 }),
+  });
+  const data = await res.json();
+  if(!data.ok) throw new Error(data.error || "fallo al subir");
+  return data;
+}
+
+function render(){
+  const app = document.getElementById("app");
+
+  let notice = "";
+  if(isAdmin && state.status === "sin-config")
+    notice = `<div class="notice">⚙️ Modo equipo: falta pegar el link del script (termina en /exec) donde dice PEGAR_AQUI_EL_LINK_DEL_SCRIPT.</div>`;
+  if(isAdmin && state.status === "error")
+    notice = `<div class="notice">Modo equipo: no se pudo conectar con el script — se muestra el catálogo base. Revisa que esté implementado como "Cualquier persona" y "Ejecutar como: Yo". <span style="text-decoration:underline; cursor:pointer;" onclick="location.reload()">Reintentar</span></div>`;
+
+  let list = state.products.filter(p => state.tab==="todo" ? true : p.group===state.tab);
+  if(state.subFilter!=="todas") list = list.filter(p=>p.subcat===state.subFilter);
+  list.sort((a,b)=>a.code-b.code);
+  list.sort((a,b)=>(b.photos.length?1:0)-(a.photos.length?1:0));
+
+  const cellPhoto = p => p.photos.length
+    ? `<img src="${p.photos[0]}" alt="${esc(p.name)}" loading="lazy" onerror="this.outerHTML='<img src=logo-mark.png style=width:28px;opacity:.55>'">`
+    : `<img src="logo-mark.png" style="width:28px; opacity:.55;">`;
+
+  let gridHTML;
+  if(!list.length){
+    gridHTML = `<div class="empty"><img src="logo-mark.png" style="width:56px; opacity:.5;"><p class="t">aún no hay piezas aquí</p></div>`;
+  } else {
+    gridHTML = `<div class="grid">` + list.map(p=>`
+      <div class="card ${p.sold?"sold":""}" onclick="openDetail(${p.code})">
+        <div class="ph">${cellPhoto(p)}
+          <span class="ref">ref. ${p.code}</span>
+          ${p.sold?'<span class="soldtag">vendido</span>':""}
+          ${p.photos.length>1 ? `<span class="multitag">📷 ${p.photos.length}</span>`:""}
+        </div>
+        <div class="info"><div class="name">${esc(p.name)}</div>
+          <div class="foot"><span class="price">${fmtCOP(p.price)}</span><span>${EMOJI[p.subcat]||"🐚"}</span></div>
+        </div>
+      </div>`).join("") + `</div>`;
+  }
+
+  const subs = state.tab!=="todo" ? subcatsOf(state.tab) : [];
+  const subChips = subs.length ? `<div class="chips"><button class="chip ${state.subFilter==="todas"?"on":""}" onclick="setSub('todas')">todas</button>
+    ${subs.map(sc=>`<button class="chip ${state.subFilter===sc?"on":""}" onclick="setSub('${esc(sc)}')">${EMOJI[sc]||"🐚"} ${esc(sc)}</button>`).join("")}</div>` : "";
+
+  const disp = state.products.filter(p=>!p.sold).length;
+  const adminTools = isAdmin ? `<div class="row">
+    <button class="chip act" onclick="sincronizar()">🔄 sincronizar</button>
+    <button class="chip act ${state.feedMode?"on":""}" onclick="toggleFeed()">${state.feedMode?"✓ vista feed":"vista feed"}</button>
+    <button class="chip act" onclick="exportCatalog()">copiar catálogo 📋</button></div>` : "";
+
+  app.innerHTML = `
+    <header>
+      <div><img src="logo-mark.png" style="width:44px;"></div>
+      <h1>acquamarina</h1>
+      <div class="sub">catálogo · ${disp} piezas disponibles</div>
+    </header>
+    ${notice}
+    <div class="row">
+      <button class="chip big ${state.tab==="clips"?"on":""}" onclick="setTab('clips')">hair clips</button>
+      <button class="chip big ${state.tab==="tanks"?"on":""}" onclick="setTab('tanks')">tank tops</button>
+      <button class="chip big ${state.tab==="todo"?"on":""}" onclick="setTab('todo')">todo</button>
+    </div>
+    ${subChips}
+    ${adminTools}
+    ${gridHTML}
+    <footer>acquamarina 🐚 hecho con amor</footer>`;
+}
+
+window.setTab = t => { state.tab=t; state.subFilter="todas"; render(); };
+window.setSub = s => { state.subFilter=s; render(); };
+window.toggleFeed = () => { state.feedMode=!state.feedMode; render(); };
+window.sincronizar = async () => {
+  toast("Sincronizando con Drive y la hoja…");
+  await loadCatalog(true);
+  toast("Catálogo actualizado 🐚");
+};
+
+window.exportCatalog = async () => {
+  const lines = ["acquamarina · catálogo",""];
+  for(const g of ["clips","tanks"]){
+    const items = state.products.filter(p=>p.group===g && !p.sold);
+    if(!items.length) continue;
+    lines.push("── "+GROUP_LABEL[g].toUpperCase()+" ──");
+    for(const sc of subcatsOf(g)){
+      const sub = items.filter(p=>p.subcat===sc);
+      if(!sub.length) continue;
+      lines.push((EMOJI[sc]||"🐚")+" "+sc);
+      sub.forEach(p=>lines.push("   ref. "+p.code+" · "+p.name+" · "+fmtCOP(p.price)));
+    }
+    lines.push("");
+  }
+  lines.push("pedidos por WhatsApp 💬 wa.me/"+WHATSAPP.replace(/[^\d]/g,""));
+  toast((await copyText(lines.join("\n"))) ? "Catálogo copiado, listo para pegar" : "No se pudo copiar");
+};
+
+window.openDetail = code => {
+  const p = state.products.find(x=>x.code===code);
+  if(!p) return;
+  document.querySelectorAll(".overlay").forEach(e=>e.remove());
+  const ov = document.createElement("div"); ov.className = "overlay";
+  ov.onclick = e => { if(e.target===ov) ov.remove(); };
+
+  const galHTML = p.photos.length
+    ? `<div class="gal" id="gal">` + p.photos.map(u=>`<div class="gph"><img src="${u}" alt="${esc(p.name)}"></div>`).join("") + `</div>
+       <div class="dots" id="dots">${p.photos.length>1 ? p.photos.map((_,i)=>`<span class="dot ${i===0?"on":""}"></span>`).join("") : ""}</div>`
+    : `<div class="ph" style="border-radius:14px; margin-bottom:12px; display:flex; align-items:center; justify-content:center;"><img src="logo-mark.png" style="width:72px; opacity:.5;"></div>`;
+
+  const wa = waLink(p);
+  const actions = p.sold
+    ? `<div class="caption" style="text-align:center;">esta pieza ya encontró dueña 🤍<br>mira las demás, hay más cositas lindas</div>`
+    : (wa ? `<a href="${wa}" target="_blank" class="btn wa">pedir por WhatsApp 💬</a>` : "");
+
+  const adminExtra = isAdmin ? `<div class="row" style="padding:0; margin-top:14px;">
+        <button class="btn camel" style="margin-top:0;" id="btnSubirFoto">📷 subir foto de esta pieza</button>
+      </div>
+      <input type="file" id="fileFoto" accept="image/*" multiple style="display:none">
+      <div class="caption">${esc(captionFor(p))}</div>
+      <button class="btn" onclick="copyCaption(${p.code})">copiar caption para Instagram 📋</button>` : "";
+
+  ov.innerHTML = `<div class="sheet"><div class="handle"></div>${galHTML}
+    <div style="display:flex; justify-content:space-between; align-items:baseline;">
+      <h2 class="serif" style="font-size:21px; margin:0;">${esc(p.name)}</h2>
+      <span style="font-size:17px; font-weight:700; color:var(--camel); white-space:nowrap; margin-left:10px;">${fmtCOP(p.price)}</span>
+    </div>
+    <div style="font-size:12px; color:var(--suave); margin-top:4px;">
+      ref. ${p.code} · ${GROUP_LABEL[p.group]||p.group} · ${EMOJI[p.subcat]||"🐚"} ${esc(p.subcat)}${p.sold?" · VENDIDO":""}
+      ${p.photos.length>1 ? " · desliza para ver más fotos ✨" : ""}
+    </div>
+    ${actions}${adminExtra}</div>`;
+  document.body.appendChild(ov);
+
+  const gal = ov.querySelector("#gal"), dots = ov.querySelectorAll("#dots .dot");
+  if(gal && dots.length) gal.addEventListener("scroll", ()=>{
+    const i = Math.round(gal.scrollLeft / gal.clientWidth);
+    dots.forEach((d,j)=>d.classList.toggle("on", j===i));
+  }, {passive:true});
+
+  if(isAdmin){
+    const fileInput = ov.querySelector("#fileFoto");
+    ov.querySelector("#btnSubirFoto").onclick = () => fileInput.click();
+    fileInput.onchange = async ev => {
+      const files = Array.from(ev.target.files||[]);
+      if(!files.length) return;
+      toast(files.length>1 ? `Subiendo ${files.length} fotos a Drive…` : "Subiendo foto a Drive…");
+      try{
+        for(const f of files) await subirFoto(p.code, f);
+        toast("Guardado en Drive — actualizando catálogo…");
+        await loadCatalog(true);
+        openDetail(p.code);
+      }catch(err){ toast("No se pudo subir la foto — intenta de nuevo"); }
+    };
+  }
+};
+
+window.copyCaption = async code => {
+  const p = state.products.find(x=>x.code===code);
+  toast((await copyText(captionFor(p))) ? "Caption copiado para Instagram" : "No se pudo copiar");
+};
+
+render();
+loadCatalog();
+</script>
+</body>
+</html>
